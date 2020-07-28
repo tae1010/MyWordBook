@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1014447445241",
+    "firebase_url": "https://wordbook-7c4e2.firebaseio.com",
+    "project_id": "wordbook-7c4e2",
+    "storage_bucket": "wordbook-7c4e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014447445241:android:23cd73ddbd092228da7e28",
+        "android_client_info": {
+          "package_name": "kr.ac.kpu.mywordbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014447445241-r04pecctlsapupb1ulhlnmi4e7ith04f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXiwy74saTvEoPEjipSkqnRkxdqYMtNYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014447445241-r04pecctlsapupb1ulhlnmi4e7ith04f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
