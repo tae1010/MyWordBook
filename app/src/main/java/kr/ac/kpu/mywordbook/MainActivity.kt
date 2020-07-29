@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Toast.makeText(this,"안녕안녕",Toast.LENGTH_SHORT).show()
+
         resultEditText = ocrResultEt
         ocrImage = ocrImageView
 
