@@ -13,4 +13,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button" />
+
+
+    <FrameLayout
+        android:id="@+id/mainFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/im_myWord"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/ic_mywordbook" />
+
+        <ImageView
+            android:id="@+id/im_sharedWord"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/ic_sharewordbook" />
+
+        <ImageView
+            android:id="@+id/im_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/ic_checkbox" />
+
+        <ImageView
+            android:id="@+id/im_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/ic_search" />
+
+
+    </LinearLayout>
+
+
 </LinearLayout>

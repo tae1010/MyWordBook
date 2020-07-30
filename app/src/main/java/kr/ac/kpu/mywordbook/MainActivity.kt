@@ -16,6 +16,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setFrag(0)
+
+        im_myWord.setOnClickListener {
+            setFrag(0)
+        }
+        im_sharedWord.setOnClickListener {
+            setFrag(1)
+        }
+        im_quiz.setOnClickListener {
+            setFrag(2)
+        }
+        im_search.setOnClickListener {
+            setFrag(3)
+        }
+
+
+
         button.setOnClickListener {
             val dlgView = layoutInflater.inflate(R.layout.add_wordbook, null)
             val btn_picture : Button = dlgView.findViewById(R.id.add_picture)
@@ -35,5 +52,24 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+    private fun setFrag(fregNum : Int){
+        val ft = supportFragmentManager.beginTransaction()
+        when(fregNum)
+        {
+            0 ->{
+                ft.replace(R.id.mainFrame,myWordBookFragment()).commit()
+            }
+            1 ->{
+                ft.replace(R.id.mainFrame, SharedFragment()).commit()
+            }
+            2 ->{
+                ft.replace(R.id.mainFrame, QuizFragment()).commit()
+            }
+            3 ->{
+                ft.replace(R.id.mainFrame, SearchFragment()).commit()
+            }
+
+        }
     }
 }
