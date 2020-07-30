@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_wordbook.*
@@ -38,6 +39,8 @@ class MainActivity : AppCompatActivity() {
             val btn_picture : Button = dlgView.findViewById(R.id.add_picture)
             val btn_text : Button = dlgView.findViewById(R.id.add_text)
             val dlgBuilder = AlertDialog.Builder(this)
+            dlgBuilder.setView(dlgView)
+            dlgBuilder.show()
 
             btn_picture.setOnClickListener {
                 val intent = Intent(this,PictureTextActivity::class.java)
@@ -45,10 +48,22 @@ class MainActivity : AppCompatActivity() {
             }
             btn_text.setOnClickListener {
 
+
+                val dlg = layoutInflater.inflate(R.layout.input_wordbook, null)
+                val dlgBuilder2 = AlertDialog.Builder(this)
+                dlgBuilder2.setView(dlg)
+                val etWord = dlgView.findViewById<EditText>(R.id.edit_word)
+                val etMeaning = dlgView.findViewById<EditText>(R.id.edit_meaning)
+
+                dlgBuilder2.setPositiveButton("추가") { dialogInterface, i ->
+
+                }.setNegativeButton("취소") { dialogInterface, i ->
+
+                }.show()
+
+
             }
 
-            dlgBuilder.setView(dlgView)
-            dlgBuilder.show()
 
         }
 

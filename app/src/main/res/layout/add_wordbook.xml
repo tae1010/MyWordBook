@@ -10,19 +10,22 @@
         android:layout_height="wrap_content"
         android:text="단어장 추가"
         android:gravity="center"
+        android:layout_margin="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <Button
         android:id="@+id/add_picture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:text="사진으로 추가"/>
 
     <Button
         android:id="@+id/add_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="직접 입력하기"/>
+        android:layout_margin="10dp"
+        android:text="직접 입력" />
 
 
 
