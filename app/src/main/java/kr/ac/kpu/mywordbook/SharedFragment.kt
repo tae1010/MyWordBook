@@ -17,8 +17,6 @@ class SharedFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragshared, container,false)
 
 
-            Toast.makeText(getActivity(), "2", Toast.LENGTH_SHORT).show()
-
 
         return view
     }

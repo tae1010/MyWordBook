@@ -16,7 +16,7 @@ class QuizFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragquiz, container,false)
 
-           Toast.makeText(activity,"3",Toast.LENGTH_SHORT).show()
+
 
         return view
     }
