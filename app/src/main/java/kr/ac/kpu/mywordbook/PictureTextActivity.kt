@@ -24,7 +24,7 @@ class PictureTextActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_picture_text)
 
         resultEditText = ocrResultEt
         ocrImage = ocrImageView

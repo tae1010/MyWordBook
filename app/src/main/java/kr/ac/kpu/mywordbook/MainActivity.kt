@@ -22,17 +22,18 @@ class MainActivity : AppCompatActivity() {
         im_myWord.setOnClickListener {
             setFrag(0)
         }
+
         im_sharedWord.setOnClickListener {
             setFrag(1)
         }
+
         im_quiz.setOnClickListener {
             setFrag(2)
         }
+
         im_search.setOnClickListener {
             setFrag(3)
         }
-
-
 
         button.setOnClickListener {
             val dlgView = layoutInflater.inflate(R.layout.add_wordbook, null)
@@ -60,14 +61,10 @@ class MainActivity : AppCompatActivity() {
                 }.setNegativeButton("취소") { dialogInterface, i ->
 
                 }.show()
-
-
             }
-
-
         }
-
     }
+
     private fun setFrag(fregNum : Int){
         val ft = supportFragmentManager.beginTransaction()
         when(fregNum)
