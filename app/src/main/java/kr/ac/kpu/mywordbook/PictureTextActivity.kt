@@ -4,9 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage
@@ -20,11 +21,13 @@ import kotlinx.android.synthetic.main.activity_picture_text.*
 
 class PictureTextActivity : AppCompatActivity() {
     lateinit var ocrImage: ImageView
-    lateinit var resultEditText: EditText
+    lateinit var resultEditText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_text)
+
+        ocrResultEt.setMovementMethod(ScrollingMovementMethod())
 
         resultEditText = ocrResultEt
         ocrImage = ocrImageView
@@ -39,6 +42,7 @@ class PictureTextActivity : AppCompatActivity() {
             processImage(processImageBtn)
         }
     }
+
     fun pickImage() {
         val intent = Intent()
         intent.type = "image/*"
@@ -105,7 +109,8 @@ class PictureTextActivity : AppCompatActivity() {
                     val elementText=element.text
                     englishKoreanTranslator.translate(elementText)
                         .addOnSuccessListener{translatedText->
-                            resultEditText.append(translatedText+"\n")
+                            resultEditText.append(elementText+"  -  "+translatedText+"\n")
+
                         }
                         .addOnFailureListener {
                             resultEditText.append(elementText+"\n")
