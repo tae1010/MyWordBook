@@ -57,6 +57,9 @@ class MainActivity : AppCompatActivity() {
                 val etMeaning = dlgView.findViewById<EditText>(R.id.edit_meaning)
 
                 dlgBuilder.setPositiveButton("추가") { dialogInterface, i ->
+
+                }.setNegativeButton("취소") { dialogInterface, i ->
+
                 }.show()
             }
         }
