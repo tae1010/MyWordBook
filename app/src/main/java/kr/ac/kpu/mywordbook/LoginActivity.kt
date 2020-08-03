@@ -19,6 +19,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val pref = this.getPreferences(0)
+        val editor = pref.edit()
+
+        ed_email.setText(pref.getString("idKey", ""))
+
         auth = Firebase.auth
 
         btn_signIn.setOnClickListener {
@@ -40,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+                            editor.putString("idKey", ed_email.text.toString()).apply()
                             Toast.makeText(
                                 baseContext, "로그인 되었습니다.",
                                 Toast.LENGTH_SHORT
