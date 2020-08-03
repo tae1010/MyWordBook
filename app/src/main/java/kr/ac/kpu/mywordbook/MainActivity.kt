@@ -51,15 +51,12 @@ class MainActivity : AppCompatActivity() {
 
 
                 val dlg = layoutInflater.inflate(R.layout.input_wordbook, null)
-                val dlgBuilder2 = AlertDialog.Builder(this)
-                dlgBuilder2.setView(dlg)
+                val dlgBuilder = AlertDialog.Builder(this)
+                dlgBuilder.setView(dlg)
                 val etWord = dlgView.findViewById<EditText>(R.id.edit_word)
                 val etMeaning = dlgView.findViewById<EditText>(R.id.edit_meaning)
 
-                dlgBuilder2.setPositiveButton("추가") { dialogInterface, i ->
-
-                }.setNegativeButton("취소") { dialogInterface, i ->
-
+                dlgBuilder.setPositiveButton("추가") { dialogInterface, i ->
                 }.show()
             }
         }

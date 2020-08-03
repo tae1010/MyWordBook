@@ -28,9 +28,12 @@ class myWordBookFragment : Fragment() {
         when (item.itemId) {
             R.id.newmemo -> {
                 val dlgView = layoutInflater.inflate(R.layout.wordbookname, null)
-                val btn_picture : TextView = dlgView.findViewById(R.id.tv_name)
-                val btn_text : EditText = dlgView.findViewById(R.id.ed_name)
+                val addwordbook : EditText = dlgView.findViewById(R.id.ed_name)
                 val dlgBuilder = AlertDialog.Builder(activity)
+
+                dlgBuilder.setPositiveButton("추가") { dialogInterface, i ->
+
+                }.show()
                 dlgBuilder.setView(dlgView)
                 dlgBuilder.show()
             }
