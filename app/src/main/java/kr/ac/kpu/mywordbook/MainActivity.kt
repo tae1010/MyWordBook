@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         val email = intent.getStringExtra("email")
         intent.putExtra("email",email)
 
+
+
         setFrag(0)
 
         im_myWord.setOnClickListener {

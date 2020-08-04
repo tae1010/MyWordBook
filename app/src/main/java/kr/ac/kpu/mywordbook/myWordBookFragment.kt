@@ -43,28 +43,26 @@ class myWordBookFragment : Fragment() {
         listview.adapter = adapter
 
 
-        for(i in 0 until wbList.size){
-            adapter.addItem("${wbList[i].title}","${wbList[i].date}")
-        }
 
 
 
         //Toast.makeText(activity,"$email",Toast.LENGTH_SHORT).show()
+        val email = activity!!.intent.getStringExtra("email")
+        val myRef1 = database.getReference("users/$email")
 
-
-
-        /*myRef.addValueEventListener(object : ValueEventListener {
+        myRef1.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
             override fun onDataChange(p0: DataSnapshot) {
+                var i = 0
                 for (snapshot in p0.children) {
-                    for(i in 0 until wbList.size) {
-                        myRef.child("$email").child("${wbList[i].title}").setValue("0")
-                    }
+                    wbList.add(ListWordBook("${snapshot.child("${snapshot.key}").key.toString()}","${snapshot.key.toString()}"))
                 }
             }
-
-        })*/
+        })
+        for(i in 0 until wbList.size){
+            adapter.addItem("${wbList[i].title}","${wbList[i].date}")
+        }
 
         return view
     }
@@ -100,7 +98,7 @@ class myWordBookFragment : Fragment() {
                     val myRef = database.getReference("users")
 
                     for(i in 0 until wbList.size){
-                        myRef.child("$email").child("${wbList[i].title}").setValue("0")
+                        myRef.child("$email").child("${wbList[i].date}").child("${wbList[i].title}").setValue("0")
                         adapter.addItem("${wbList[i].title}","${wbList[i].date}")
                     }
 
