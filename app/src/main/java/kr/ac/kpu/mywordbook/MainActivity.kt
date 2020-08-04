@@ -17,6 +17,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val intent = Intent(this, myWordBookFragment::class.java)
+        val email = intent.getStringExtra("email")
+        intent.putExtra("email",email)
+
         setFrag(0)
 
         im_myWord.setOnClickListener {

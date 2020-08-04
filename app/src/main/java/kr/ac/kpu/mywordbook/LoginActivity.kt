@@ -50,6 +50,8 @@ class LoginActivity : AppCompatActivity() {
                                 baseContext, "로그인 되었습니다.",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            //val bundle = Bundle()
+                            //bundle.putSerializable("email",nodotemail)
                             val intent = Intent(this, MainActivity::class.java)
                             intent.putExtra("email",nodotemail)
                             startActivity(intent)
