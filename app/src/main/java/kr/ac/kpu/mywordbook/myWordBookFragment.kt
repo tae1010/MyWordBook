@@ -9,11 +9,9 @@ import android.os.Bundle
 import android.service.autofill.Dataset
 import android.util.Log
 import android.view.*
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -31,12 +29,16 @@ class myWordBookFragment : Fragment() {
 
     val database = Firebase.database
 
-    lateinit var listview : ListView
-    lateinit var adapter : WordBookAdapter
+    lateinit var listview: ListView
+    lateinit var adapter: WordBookAdapter
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragmywordbook, container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragmywordbook, container, false)
 
         setHasOptionsMenu(true)
 
@@ -53,15 +55,19 @@ class myWordBookFragment : Fragment() {
         myRef1.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
+
             override fun onDataChange(p0: DataSnapshot) {
                 for (snapshot in p0.children) {
                     val myRef2 = database.getReference("users/$email/${snapshot.key}")
                     myRef2.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {
                         }
+
                         override fun onDataChange(p0: DataSnapshot) {
                             for (snapshot in p0.children) {
-                                wbList.add(ListWordBook("${snapshot.key.toString()}","${myRef2.key.toString()}"))
+                                wbList.add(
+                                    ListWordBook("${snapshot.key.toString()}", "${myRef2.key.toString()}")
+                                )
                                 //Toast.makeText(activity,"${snapshot.key.toString()}",Toast.LENGTH_SHORT).show()
                             }
                         }
@@ -70,18 +76,27 @@ class myWordBookFragment : Fragment() {
             }
         })
 
-        for(i in 0 until wbList.size){
-            adapter.addItem("${wbList[i].title}","${wbList[i].date}")
-            Log.d(TAG,"###############################")
+        for (i in 0 until wbList.size) {
+            adapter.addItem("${wbList[i].title}", "${wbList[i].date}")
+            Log.d(TAG, "###############################")
         }
+
+        listview.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val intent = Intent(activity, WordBookActivity::class.java)
+                intent.putExtra("title", wbList[position].title)
+                intent.putExtra("date", wbList[position].date)
+                startActivity(intent)
+            }
+
 
         wbList.clear()
 
         return view
     }
 
-    override fun onCreateOptionsMenu(menu: Menu,inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu,inflater)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu, menu)
     }
 
@@ -91,7 +106,7 @@ class myWordBookFragment : Fragment() {
             R.id.newmemo -> {
                 val email = activity!!.intent.getStringExtra("email")
                 val dlgView = layoutInflater.inflate(R.layout.wordbookname, null)
-                val addwordbook : EditText = dlgView.findViewById(R.id.ed_name)
+                val addwordbook: EditText = dlgView.findViewById(R.id.ed_name)
                 val dlgBuilder = AlertDialog.Builder(activity)
                 dlgBuilder.setView(dlgView)
 
@@ -106,13 +121,14 @@ class myWordBookFragment : Fragment() {
                     val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분")
                     val nowtime = current.format(formatter)
 
-                    wbList.add(ListWordBook("${addwordbook.text}","$nowtime"))
+                    wbList.add(ListWordBook("${addwordbook.text}", "$nowtime"))
 
                     val myRef = database.getReference("users")
 
-                    for(i in 0 until wbList.size){
-                        myRef.child("$email").child("${wbList[i].date}").child("${wbList[i].title}").setValue("0")
-                        adapter.addItem("${wbList[i].title}","${wbList[i].date}")
+                    for (i in 0 until wbList.size) {
+                        myRef.child("$email").child("${wbList[i].date}").child("${wbList[i].title}")
+                            .setValue("0")
+                        adapter.addItem("${wbList[i].title}", "${wbList[i].date}")
                     }
 
 
