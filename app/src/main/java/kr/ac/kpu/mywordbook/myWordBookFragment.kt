@@ -1,10 +1,13 @@
 package kr.ac.kpu.mywordbook
 
 import android.app.AlertDialog
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.nfc.Tag
 import android.os.Build
 import android.os.Bundle
 import android.service.autofill.Dataset
+import android.util.Log
 import android.view.*
 import android.widget.EditText
 import android.widget.ListView
@@ -31,7 +34,6 @@ class myWordBookFragment : Fragment() {
     lateinit var listview : ListView
     lateinit var adapter : WordBookAdapter
 
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragmywordbook, container,false)
@@ -42,9 +44,7 @@ class myWordBookFragment : Fragment() {
         listview = view!!.findViewById(R.id.lv_wordbook) as ListView
         listview.adapter = adapter
 
-
-
-
+        //adapter.notifyDataSetChanged() //삭제하거나 추가할때 리스트뷰 갱신
 
         //Toast.makeText(activity,"$email",Toast.LENGTH_SHORT).show()
         val email = activity!!.intent.getStringExtra("email")
@@ -54,15 +54,28 @@ class myWordBookFragment : Fragment() {
             override fun onCancelled(p0: DatabaseError) {
             }
             override fun onDataChange(p0: DataSnapshot) {
-                var i = 0
                 for (snapshot in p0.children) {
-                    wbList.add(ListWordBook("${snapshot.child("${snapshot.key}").key.toString()}","${snapshot.key.toString()}"))
+                    val myRef2 = database.getReference("users/$email/${snapshot.key}")
+                    myRef2.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {
+                        }
+                        override fun onDataChange(p0: DataSnapshot) {
+                            for (snapshot in p0.children) {
+                                wbList.add(ListWordBook("${snapshot.key.toString()}","${myRef2.key.toString()}"))
+                                //Toast.makeText(activity,"${snapshot.key.toString()}",Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    })
                 }
             }
         })
+
         for(i in 0 until wbList.size){
             adapter.addItem("${wbList[i].title}","${wbList[i].date}")
+            Log.d(TAG,"###############################")
         }
+
+        wbList.clear()
 
         return view
     }
