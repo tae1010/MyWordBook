@@ -65,9 +65,7 @@ class myWordBookFragment : Fragment() {
 
                         override fun onDataChange(p0: DataSnapshot) {
                             for (snapshot in p0.children) {
-                                wbList.add(
-                                    ListWordBook("${snapshot.key.toString()}", "${myRef2.key.toString()}")
-                                )
+                                wbList.add(ListWordBook("${snapshot.key.toString()}", "${myRef2.key.toString()}"))
                                 //Toast.makeText(activity,"${snapshot.key.toString()}",Toast.LENGTH_SHORT).show()
                             }
                         }
@@ -84,6 +82,7 @@ class myWordBookFragment : Fragment() {
         listview.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 val intent = Intent(activity, WordBookActivity::class.java)
+                intent.putExtra("email",email)
                 intent.putExtra("title", wbList[position].title)
                 intent.putExtra("date", wbList[position].date)
                 startActivity(intent)
