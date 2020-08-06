@@ -41,34 +41,6 @@ class MainActivity : AppCompatActivity() {
             setFrag(3)
         }
 
-        button.setOnClickListener {
-            val dlgView = layoutInflater.inflate(R.layout.add_wordbook, null)
-            val btn_picture : Button = dlgView.findViewById(R.id.add_picture)
-            val btn_text : Button = dlgView.findViewById(R.id.add_text)
-            val dlgBuilder = AlertDialog.Builder(this)
-            dlgBuilder.setView(dlgView)
-            dlgBuilder.show()
-
-            btn_picture.setOnClickListener {
-                val intent = Intent(this,PictureTextActivity::class.java)
-                startActivity(intent)
-            }
-            btn_text.setOnClickListener {
-
-
-                val dlg = layoutInflater.inflate(R.layout.input_wordbook, null)
-                val dlgBuilder = AlertDialog.Builder(this)
-                dlgBuilder.setView(dlg)
-                val etWord = dlgView.findViewById<EditText>(R.id.edit_word)
-                val etMeaning = dlgView.findViewById<EditText>(R.id.edit_meaning)
-
-                dlgBuilder.setPositiveButton("추가") { dialogInterface, i ->
-
-                }.setNegativeButton("취소") { dialogInterface, i ->
-
-                }.show()
-            }
-        }
     }
 
     private fun setFrag(fregNum : Int){
