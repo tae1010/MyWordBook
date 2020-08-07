@@ -60,6 +60,9 @@ class WordBookActivity : AppCompatActivity() {
 
             btn_picture.setOnClickListener {
                 val intent = Intent(this,PictureTextActivity::class.java)
+                intent.putExtra("title",title)
+                intent.putExtra("date",date)
+                intent.putExtra("email",email)
                 startActivity(intent)
             }
             btn_text.setOnClickListener {

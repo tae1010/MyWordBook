@@ -41,20 +41,15 @@
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/ocrResultEt"
+    <ListView
+        android:id="@+id/ocrResultLv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/actionContainer"
-        android:layout_gravity="left"
         android:layout_weight="1"
-        android:lineSpacingExtra="15dp"
         android:background="@android:color/transparent"
-        android:gravity="top"
         android:hint="Detected text will appear here."
         android:inputType="textMultiLine"
-        android:padding="10dp"
-        android:scrollbars="vertical"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
 

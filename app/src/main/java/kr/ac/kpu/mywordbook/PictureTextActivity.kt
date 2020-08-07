@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,15 +22,22 @@ import kotlinx.android.synthetic.main.activity_picture_text.*
 
 class PictureTextActivity : AppCompatActivity() {
     lateinit var ocrImage: ImageView
-    lateinit var resultEditText: TextView
+    lateinit var listview: ListView
+    lateinit var adapter: WordAdapter
+
+    //val title = intent.getStringExtra("title")
+    //val date = intent.getStringExtra("date")
+    //val email = intent.getStringExtra("email")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_text)
 
-        ocrResultEt.setMovementMethod(ScrollingMovementMethod())
 
-        resultEditText = ocrResultEt
+
+
+
         ocrImage = ocrImageView
 
         //set an onclick listener on the button to trigger///// the @pickImage() method
@@ -40,6 +48,11 @@ class PictureTextActivity : AppCompatActivity() {
         //set an onclick listener on the button to trigger the @processImage method
         processImageBtn.setOnClickListener {
             processImage(processImageBtn)
+
+
+
+
+
         }
     }
 
@@ -58,7 +71,7 @@ class PictureTextActivity : AppCompatActivity() {
     }
     fun processImage(v: View) {
         if (ocrImage.drawable != null) {
-            resultEditText.setText("")
+            //resultEditText.setText("")
             v.isEnabled = false
             val bitmap = (ocrImage.drawable as BitmapDrawable).bitmap
             val image = FirebaseVisionImage.fromBitmap(bitmap)
@@ -71,7 +84,8 @@ class PictureTextActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener {
                     v.isEnabled = true
-                    resultEditText.setText("Failed")
+                    Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show()
+                    //resultEditText.setText("Failed")
                 }
         } else {
             Toast.makeText(this, "Select an Image First", Toast.LENGTH_LONG).show()
@@ -79,10 +93,19 @@ class PictureTextActivity : AppCompatActivity() {
 
     }
     private fun processTextBlock(result: FirebaseVisionText) {
+
+        var transWordList = arrayListOf<ListWord>()
+
+        adapter = WordAdapter()
+        listview = findViewById(R.id.ocrResultLv)
+        listview.adapter = adapter
+
+
         var i:Int=0
         val resultText=result.text
         if (result.textBlocks.size == 0) {
-            resultEditText.setText("No Text Found")
+            Toast.makeText(this,"No Text Found",Toast.LENGTH_SHORT).show()
+            //resultEditText.setText("No Text Found")
             return
         }
 
@@ -105,19 +128,27 @@ class PictureTextActivity : AppCompatActivity() {
             for(line in block.lines){
                 val lineText=line.text
                 for(element in line.elements){
-                    i++
                     val elementText=element.text
-                    englishKoreanTranslator.translate(elementText)
+                    val translatedText =
+                        englishKoreanTranslator.translate(elementText)
                         .addOnSuccessListener{translatedText->
-                            resultEditText.append(elementText+"  -  "+translatedText+"\n")
+                            transWordList.add(ListWord("$elementText","$translatedText"))
 
+                            //resultEditText.append(elementText+"  -  "+translatedText+"\n")
                         }
                         .addOnFailureListener {
-                            resultEditText.append(elementText+"\n")
+                            //resultEditText.append(elementText+"\n")
+                            transWordList.add(ListWord("$elementText",""))
                         }
-                    //resultEditText.append(elementText+"\n")
+                    //Toast.makeText(this,"가나가",Toast.LENGTH_SHORT).show()
+                    adapter.addItem("$elementText", "$translatedText")
                 }
             }
         }
+        //for(i in 0 until transWordList.size){
+        //    adapter.addItem("${transWordList[i].egWord}", "${transWordList[i].krWord}")
+        //    Toast.makeText(this,"가가가",Toast.LENGTH_SHORT).show()
+        //}
+
     }
 }
