@@ -4,6 +4,15 @@
     android:orientation="horizontal"
     android:layout_height="match_parent">
 
+    <CheckBox
+        android:id="@+id/word_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:focusable="false"
+        android:clickable="false"
+        android:checked="false"/>
+
     <TextView
         android:id="@+id/egWord"
         android:layout_width="match_parent"

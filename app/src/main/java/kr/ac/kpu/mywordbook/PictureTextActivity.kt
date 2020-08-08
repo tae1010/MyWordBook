@@ -4,13 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ListView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguage
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOptions
@@ -21,20 +22,19 @@ import kotlinx.android.synthetic.main.activity_picture_text.*
 
 
 class PictureTextActivity : AppCompatActivity() {
+
+
     lateinit var ocrImage: ImageView
     lateinit var listview: ListView
     lateinit var adapter: WordAdapter
 
-    //val title = intent.getStringExtra("title")
-    //val date = intent.getStringExtra("date")
-    //val email = intent.getStringExtra("email")
+    val database = Firebase.database
+    var transWordList = arrayListOf<ListWord>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_text)
-
-
 
 
 
@@ -48,7 +48,6 @@ class PictureTextActivity : AppCompatActivity() {
         //set an onclick listener on the button to trigger the @processImage method
         processImageBtn.setOnClickListener {
             processImage(processImageBtn)
-
 
 
 
@@ -94,12 +93,13 @@ class PictureTextActivity : AppCompatActivity() {
     }
     private fun processTextBlock(result: FirebaseVisionText) {
 
-        var transWordList = arrayListOf<ListWord>()
+        val title = intent.getStringExtra("title")
+        val date = intent.getStringExtra("date")
+        val email = intent.getStringExtra("email")
 
         adapter = WordAdapter()
         listview = findViewById(R.id.ocrResultLv)
         listview.adapter = adapter
-
 
         var i:Int=0
         val resultText=result.text
@@ -129,26 +129,30 @@ class PictureTextActivity : AppCompatActivity() {
                 val lineText=line.text
                 for(element in line.elements){
                     val elementText=element.text
-                    val translatedText =
-                        englishKoreanTranslator.translate(elementText)
+                    englishKoreanTranslator.translate(elementText)
                         .addOnSuccessListener{translatedText->
                             transWordList.add(ListWord("$elementText","$translatedText"))
-
                             //resultEditText.append(elementText+"  -  "+translatedText+"\n")
                         }
                         .addOnFailureListener {
                             //resultEditText.append(elementText+"\n")
                             transWordList.add(ListWord("$elementText",""))
                         }
-                    //Toast.makeText(this,"가나가",Toast.LENGTH_SHORT).show()
-                    adapter.addItem("$elementText", "$translatedText")
+                    //Toast.makeText(this,"${transWordList.size}",Toast.LENGTH_SHORT).show()
+                    //adapter.addItem("${transWordList}", "$translatedText")
                 }
             }
         }
-        //for(i in 0 until transWordList.size){
-        //    adapter.addItem("${transWordList[i].egWord}", "${transWordList[i].krWord}")
-        //    Toast.makeText(this,"가가가",Toast.LENGTH_SHORT).show()
-        //}
+        for(i in 0 until transWordList.size){
+            adapter.addItem("${transWordList[i].egWord}", "${transWordList[i].krWord}")
+            //Toast.makeText(this,"가가가",Toast.LENGTH_SHORT).show()
+        }
 
+        pt_add.setOnClickListener{
+            for(i in 0 until transWordList.size){
+                val myRef = database.getReference("users/$email/$date/$title")
+                myRef.child("${transWordList[i].egWord}").setValue("${transWordList[i].krWord}")
+            }
+        }
     }
 }
