@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
@@ -29,7 +28,7 @@ class PictureTextActivity : AppCompatActivity() {
     lateinit var adapter: WordAdapter
 
     val database = Firebase.database
-    var transWordList = arrayListOf<ListWord>()
+    var transWordList = ArrayList<ListWord>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,6 +100,9 @@ class PictureTextActivity : AppCompatActivity() {
         listview = findViewById(R.id.ocrResultLv)
         listview.adapter = adapter
 
+        val checkedItems = listview.checkedItemPositions
+        val count = adapter.count
+
         var i:Int=0
         val resultText=result.text
         if (result.textBlocks.size == 0) {
@@ -123,7 +125,6 @@ class PictureTextActivity : AppCompatActivity() {
             }
         //translate end
         for(block in result.textBlocks){
-
             val blockText=block.text
             for(line in block.lines){
                 val lineText=line.text
@@ -131,8 +132,8 @@ class PictureTextActivity : AppCompatActivity() {
                     val elementText=element.text
                     englishKoreanTranslator.translate(elementText)
                         .addOnSuccessListener{translatedText->
-                            transWordList.add(ListWord("$elementText","$translatedText"))
-                            //resultEditText.append(elementText+"  -  "+translatedText+"\n")
+                            //transWordList.add(ListWord("$elementText", "$translatedText"))
+                            adapter.addItem("$elementText", "$translatedText")
                         }
                         .addOnFailureListener {
                             //resultEditText.append(elementText+"\n")
@@ -149,6 +150,17 @@ class PictureTextActivity : AppCompatActivity() {
         }
 
         pt_add.setOnClickListener{
+            //adapter.clearItem()
+            for(i in count-1 downTo 0) {
+                if (checkedItems.get(i)) {
+                    //transWordList.removeAt(i)
+                }
+            }
+            for(i in 0 until transWordList.size){
+                adapter.addItem("${transWordList[i].egWord}", "${transWordList[i].krWord}")
+            }
+            listview.clearChoices()
+            //adapter.notifyDataSetChanged()
             for(i in 0 until transWordList.size){
                 val myRef = database.getReference("users/$email/$date/$title")
                 myRef.child("${transWordList[i].egWord}").setValue("${transWordList[i].krWord}")

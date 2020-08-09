@@ -1,19 +1,18 @@
 package kr.ac.kpu.mywordbook
 
+import android.R.id.checkbox
 import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_word_book.*
+
 
 class WordBookActivity : AppCompatActivity() {
 
@@ -31,6 +30,12 @@ class WordBookActivity : AppCompatActivity() {
         adapter = WordAdapter()
         listview = findViewById(R.id.word_listview)
         listview.adapter = adapter
+        //val cb : CheckBox? = findViewById(R.id.word_check) as CheckBox
+        //listview.onItemClickListener =
+        //    AdapterView.OnItemClickListener { parent, view, position, id ->
+        //    cb!!.setChecked(true)
+        //}
+
 
         val title = intent.getStringExtra("title")
         val date = intent.getStringExtra("date")
