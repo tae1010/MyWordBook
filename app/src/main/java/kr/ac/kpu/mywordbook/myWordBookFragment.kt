@@ -32,6 +32,7 @@ class myWordBookFragment : Fragment() {
     lateinit var listview: ListView
     lateinit var adapter: WordBookAdapter
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -127,6 +128,7 @@ class myWordBookFragment : Fragment() {
                     for (i in 0 until wbList.size) {
                         myRef.child("$email").child("${wbList[i].date}").child("${wbList[i].title}")
                             .setValue("0")
+                        //myRef.child("share").child("$email").child("${wbList[i].title}").setValue("0")
                         adapter.addItem("${wbList[i].title}", "${wbList[i].date}")
                     }
 
