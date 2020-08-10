@@ -29,6 +29,7 @@ class PictureTextActivity : AppCompatActivity() {
 
     val database = Firebase.database
     var transWordList = ArrayList<ListWord>()
+    var transWordList1 = ArrayList<ListWord>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +50,6 @@ class PictureTextActivity : AppCompatActivity() {
             processImage(processImageBtn)
 
 
-
-
         }
     }
 
@@ -67,6 +66,7 @@ class PictureTextActivity : AppCompatActivity() {
             ocrImage.setImageURI(data!!.data)   //ocrImage에 select한 이미지의 uri저장
         }
     }
+
     fun processImage(v: View) {
         if (ocrImage.drawable != null) {
             //resultEditText.setText("")
@@ -82,7 +82,7 @@ class PictureTextActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener {
                     v.isEnabled = true
-                    Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
                     //resultEditText.setText("Failed")
                 }
         } else {
@@ -90,6 +90,7 @@ class PictureTextActivity : AppCompatActivity() {
         }
 
     }
+
     private fun processTextBlock(result: FirebaseVisionText) {
 
         val title = intent.getStringExtra("title")
@@ -103,20 +104,20 @@ class PictureTextActivity : AppCompatActivity() {
         val checkedItems = listview.checkedItemPositions
         val count = adapter.count
 
-        var i:Int=0
-        val resultText=result.text
+        var i: Int = 0
+        val resultText = result.text
         if (result.textBlocks.size == 0) {
-            Toast.makeText(this,"No Text Found",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "No Text Found", Toast.LENGTH_SHORT).show()
             //resultEditText.setText("No Text Found")
             return
         }
 
         //translate start
-        val options= FirebaseTranslatorOptions.Builder()
+        val options = FirebaseTranslatorOptions.Builder()
             .setSourceLanguage(FirebaseTranslateLanguage.EN)
             .setTargetLanguage(FirebaseTranslateLanguage.KO)
             .build()
-        val englishKoreanTranslator= FirebaseNaturalLanguage.getInstance().getTranslator(options)
+        val englishKoreanTranslator = FirebaseNaturalLanguage.getInstance().getTranslator(options)
         //model download
         englishKoreanTranslator.downloadModelIfNeeded()
             .addOnSuccessListener {
@@ -124,47 +125,51 @@ class PictureTextActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
             }
         //translate end
-        for(block in result.textBlocks){
-            val blockText=block.text
-            for(line in block.lines){
-                val lineText=line.text
-                for(element in line.elements){
-                    val elementText=element.text
+        for (block in result.textBlocks) {
+            val blockText = block.text
+            for (line in block.lines) {
+                val lineText = line.text
+                for (element in line.elements) {
+                    val elementText = element.text
                     englishKoreanTranslator.translate(elementText)
-                        .addOnSuccessListener{translatedText->
-                            //transWordList.add(ListWord("$elementText", "$translatedText"))
-                            adapter.addItem("$elementText", "$translatedText")
+                        .addOnSuccessListener { translatedText ->
+                            transWordList.add(ListWord("$elementText", "$translatedText"))
+                            //adapter.addItem("$elementText", "$translatedText")
                         }
                         .addOnFailureListener {
                             //resultEditText.append(elementText+"\n")
-                            transWordList.add(ListWord("$elementText",""))
+                            transWordList.add(ListWord("$elementText", ""))
                         }
                     //Toast.makeText(this,"${transWordList.size}",Toast.LENGTH_SHORT).show()
                     //adapter.addItem("${transWordList}", "$translatedText")
                 }
             }
         }
-        for(i in 0 until transWordList.size){
+        for (i in 0 until transWordList.size) {
             adapter.addItem("${transWordList[i].egWord}", "${transWordList[i].krWord}")
             //Toast.makeText(this,"가가가",Toast.LENGTH_SHORT).show()
         }
 
-        pt_add.setOnClickListener{
-            //adapter.clearItem()
-            for(i in count-1 downTo 0) {
-                if (checkedItems.get(i)) {
+        pt_add.setOnClickListener {
+            //adapter.clearItem().
+            for (i in 0 until transWordList.size) {
+               if (checkedItems.get(i)) {
                     //transWordList.removeAt(i)
+                    transWordList1.add(
+                        ListWord("${transWordList[i].egWord}", "${transWordList[i].krWord}"))
                 }
             }
-            for(i in 0 until transWordList.size){
+            /*for (i in 0 until transWordList.size) {
                 adapter.addItem("${transWordList[i].egWord}", "${transWordList[i].krWord}")
-            }
+            }*/
             listview.clearChoices()
+            Toast.makeText(this, "${transWordList1.size} ${transWordList.size}", Toast.LENGTH_SHORT).show()
             //adapter.notifyDataSetChanged()
-            for(i in 0 until transWordList.size){
+            for (i in 0 until transWordList1.size) {
                 val myRef = database.getReference("users/$email/$date/$title")
-                myRef.child("${transWordList[i].egWord}").setValue("${transWordList[i].krWord}")
+                myRef.child("${transWordList1[i].egWord}").setValue("${transWordList1[i].krWord}")
             }
+            transWordList1.clear()
         }
     }
 }
