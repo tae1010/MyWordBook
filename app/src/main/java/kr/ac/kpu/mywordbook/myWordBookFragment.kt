@@ -203,10 +203,14 @@ class myWordBookFragment : Fragment() {
 
                     val myRef = database.getReference("users")
 
-                    for (i in 0 until wbList.size) {
-                        myRef.child("$email").child("${wbList[i].date}").child("${wbList[i].title}")
-                            .setValue("0")
+                    //for (i in wbList.size-1 until wbList.size) {
+                    //    myRef.child("$email").child("${wbList[i].date}").child("${wbList[i].title}").setValue("0")
+                    //    //myRef.child("share").child("$email").child("${wbList[i].title}").setValue("0")
+                    //    adapter.addItem("${wbList[i].title}", "${wbList[i].date}")
+                    //}
+                        myRef.child("$email").child("${wbList[wbList.size-1].date}").child("${wbList[wbList.size-1].title}").setValue("0")
                         //myRef.child("share").child("$email").child("${wbList[i].title}").setValue("0")
+                    for(i in 0 until wbList.size){
                         adapter.addItem("${wbList[i].title}", "${wbList[i].date}")
                     }
 
