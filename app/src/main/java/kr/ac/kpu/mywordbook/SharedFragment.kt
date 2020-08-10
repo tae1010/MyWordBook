@@ -68,7 +68,6 @@ class SharedFragment : Fragment() {
                             }
 
                         }
-
                     })
                 }
             }
