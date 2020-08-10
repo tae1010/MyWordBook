@@ -1,11 +1,13 @@
 package kr.ac.kpu.mywordbook
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -24,16 +26,21 @@ class SharedFragment : Fragment() {
     lateinit var listview: ListView
     lateinit var adapter: WordBookAdapter
 
-    var swbList = arrayListOf<ListWordBook>()
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragshared, container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        adapter = WordBookAdapter()
+        var swbList = arrayListOf<ListWordBook>()
+        val view = inflater.inflate(R.layout.fragshared, container, false)
+
+
         listview = view!!.findViewById(R.id.lv_sharedWordBook) as ListView
-        listview.adapter = adapter
+
 
         val myRef = database.getReference("users/share")
 
@@ -49,24 +56,34 @@ class SharedFragment : Fragment() {
                         }
 
                         override fun onDataChange(p0: DataSnapshot) {
+                            adapter = WordBookAdapter()
+                            listview.adapter = adapter
                             for (snapshot in p0.children) {
                                 swbList.add(ListWordBook("${snapshot.key.toString()}", "${myRef2.key.toString()}"))
-
+                                Toast.makeText(activity, "1", Toast.LENGTH_SHORT).show()
                             }
-                            Toast.makeText(activity,"${swbList.size}",Toast.LENGTH_SHORT).show()
                             for (i in 0 until swbList.size) {
                                 adapter.addItem("${swbList[i].title}", "${swbList[i].date}")
+                                Toast.makeText(activity, "2", Toast.LENGTH_SHORT).show()
                             }
+
                         }
+
                     })
                 }
             }
         })
 
-        for (i in 0 until swbList.size) {
-            adapter.addItem("${swbList[i].title}", "${swbList[i].date}")
-        }
+        Toast.makeText(activity, "111", Toast.LENGTH_SHORT).show()
 
+
+        listview.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val intent = Intent(activity, SharedWordBookActivity::class.java)
+                intent.putExtra("title", wbList[position].title)
+                intent.putExtra("date", wbList[position].date)
+                startActivity(intent)
+            }
 
         return view
     }
