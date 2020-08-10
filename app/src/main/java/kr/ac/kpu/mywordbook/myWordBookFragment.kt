@@ -32,6 +32,50 @@ class myWordBookFragment : Fragment() {
     lateinit var listview: ListView
     lateinit var adapter: WordBookAdapter
 
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater : MenuInflater = activity!!.menuInflater
+        inflater.inflate(R.menu.menu1,menu)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
+
+        adapter = WordBookAdapter()
+        listview = view!!.findViewById(R.id.lv_wordbook) as ListView
+        listview.adapter = adapter
+
+        val myRef = database.getReference("users")
+
+        val email = activity!!.intent.getStringExtra("email")
+
+        return when(item.itemId){
+            R.id.share ->{
+                true
+            }
+
+            R.id.delete ->{
+
+                for (i in 0 until wbList.size) {
+                    if(wbList[info.position].date == "${wbList[i].date}") {
+                        myRef.child("$email").child("${wbList[i].date}").removeValue()
+                        Toast.makeText(activity, "${info.position}  $i", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                wbList.removeAt(info.position)
+
+                adapter.notifyDataSetChanged();
+                true
+            }
+
+            else -> super.onContextItemSelected(item)
+        }
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -43,9 +87,13 @@ class myWordBookFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+
         adapter = WordBookAdapter()
         listview = view!!.findViewById(R.id.lv_wordbook) as ListView
         listview.adapter = adapter
+
+        registerForContextMenu(listview)
+
 
         //adapter.notifyDataSetChanged() //삭제하거나 추가할때 리스트뷰 갱신
 
