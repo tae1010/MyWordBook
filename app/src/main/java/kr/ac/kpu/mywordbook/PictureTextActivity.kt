@@ -163,13 +163,14 @@ class PictureTextActivity : AppCompatActivity() {
                 adapter.addItem("${transWordList[i].egWord}", "${transWordList[i].krWord}")
             }*/
             listview.clearChoices()
-            Toast.makeText(this, "${transWordList1.size} ${transWordList.size}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "${transWordList1.size} ${transWordList.size}", Toast.LENGTH_SHORT).show()
             //adapter.notifyDataSetChanged()
             for (i in 0 until transWordList1.size) {
                 val myRef = database.getReference("users/$email/$date/$title")
                 myRef.child("${transWordList1[i].egWord}").setValue("${transWordList1[i].krWord}")
             }
             transWordList1.clear()
+            finish()
         }
     }
 }
