@@ -54,9 +54,7 @@ class SharedFragment : Fragment() {
 
                             }
                             Toast.makeText(activity,"${swbList.size}",Toast.LENGTH_SHORT).show()
-                            for (i in 0 until swbList.size) {
-                                adapter.addItem("${swbList[i].title}", "${swbList[i].date}")
-                            }
+
                         }
                     })
                 }
@@ -66,7 +64,6 @@ class SharedFragment : Fragment() {
         for (i in 0 until swbList.size) {
             adapter.addItem("${swbList[i].title}", "${swbList[i].date}")
         }
-
 
         return view
     }
