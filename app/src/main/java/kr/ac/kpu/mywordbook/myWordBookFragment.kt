@@ -66,6 +66,7 @@ class myWordBookFragment : Fragment() {
 
                 myRef3.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
+
                     }
 
                     override fun onDataChange(p0: DataSnapshot) {
