@@ -5,10 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
+    <ListView
+        android:id="@+id/lv_sharedWordBook"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="검색"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:layout_height="match_parent" />
 </LinearLayout>

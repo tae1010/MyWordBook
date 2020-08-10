@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WordBookActivity"></activity>
-        <activity android:name=".PictureTextActivity"></activity>
+        <activity android:name=".SharedWordBookActivity"></activity>
+        <activity android:name=".WordBookActivity" />
+        <activity android:name=".PictureTextActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

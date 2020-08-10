@@ -24,6 +24,7 @@ import java.time.format.DateTimeFormatter
 
 
 var wbList = arrayListOf<ListWordBook>()
+var wList = arrayListOf<ListWord>()
 
 class myWordBookFragment : Fragment() {
 
@@ -49,12 +50,41 @@ class myWordBookFragment : Fragment() {
         listview = view!!.findViewById(R.id.lv_wordbook) as ListView
         listview.adapter = adapter
 
+        val email = activity!!.intent.getStringExtra("email")
+
         val myRef = database.getReference("users")
 
-        val email = activity!!.intent.getStringExtra("email")
+        val myRef2 = database.getReference("users/share")
+
+        val myRef3 = database.getReference("users/$email/${wbList[info.position].date}/${wbList[info.position].title}")
+
 
         return when(item.itemId){
             R.id.share ->{
+
+                //myRef2.child("$email").child("${wbList[info.position].title}")
+
+                myRef3.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                    }
+
+                    override fun onDataChange(p0: DataSnapshot) {
+                        for (snapshot in p0.children) {
+                            wList.add(ListWord(snapshot.key,snapshot.value.toString()))
+                        }
+                        for(i in 0 until wList.size) {
+                            myRef2.child("$email").child("${wbList[info.position].title}")
+                                .child("${wList[i].egWord}").setValue("${wList[i].krWord}")
+                        }
+                        Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
+                    }
+
+                })
+
+                Toast.makeText(activity,"rksk",Toast.LENGTH_SHORT).show()
+
+
+                //Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
                 true
             }
 

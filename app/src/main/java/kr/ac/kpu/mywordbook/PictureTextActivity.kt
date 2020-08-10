@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import android.widget.ImageView
 import android.widget.ListView
@@ -30,6 +31,8 @@ class PictureTextActivity : AppCompatActivity() {
     val database = Firebase.database
     var transWordList = ArrayList<ListWord>()
     var transWordList1 = ArrayList<ListWord>()
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -172,5 +175,6 @@ class PictureTextActivity : AppCompatActivity() {
             transWordList1.clear()
             finish()
         }
+
     }
 }
