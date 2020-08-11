@@ -27,8 +27,6 @@ class SharedFragment : Fragment() {
     lateinit var adapter: WordBookAdapter
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,27 +58,29 @@ class SharedFragment : Fragment() {
                             listview.adapter = adapter
                             for (snapshot in p0.children) {
                                 swbList.add(ListWordBook("${snapshot.key.toString()}", "${myRef2.key.toString()}"))
-                                Toast.makeText(activity, "1", Toast.LENGTH_SHORT).show()
+                                //Toast.makeText(activity, "1", Toast.LENGTH_SHORT).show()
                             }
                             for (i in 0 until swbList.size) {
                                 adapter.addItem("${swbList[i].title}", "${swbList[i].date}")
-                                Toast.makeText(activity, "2", Toast.LENGTH_SHORT).show()
+                                //Toast.makeText(activity, "2", Toast.LENGTH_SHORT).show()
                             }
-
                         }
                     })
                 }
             }
         })
 
-        Toast.makeText(activity, "111", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, "111", Toast.LENGTH_SHORT).show()
 
 
         listview.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 val intent = Intent(activity, SharedWordBookActivity::class.java)
-                intent.putExtra("title", wbList[position].title)
-                intent.putExtra("date", wbList[position].date)
+                //intent.putExtra("swb",swbList)
+                //intent.putExtra("position",position)
+                //intent.putExtra("email",email)
+                intent.putExtra("title", swbList[position].title)
+                intent.putExtra("email", swbList[position].date)
                 startActivity(intent)
             }
 

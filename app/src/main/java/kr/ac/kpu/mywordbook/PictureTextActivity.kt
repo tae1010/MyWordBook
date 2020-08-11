@@ -150,6 +150,7 @@ class PictureTextActivity : AppCompatActivity() {
         }
         for (i in 0 until transWordList.size) {
             adapter.addItem("${transWordList[i].egWord}", "${transWordList[i].krWord}")
+            adapter.notifyDataSetChanged()
             //Toast.makeText(this,"가가가",Toast.LENGTH_SHORT).show()
         }
 
@@ -174,7 +175,11 @@ class PictureTextActivity : AppCompatActivity() {
             }
             transWordList1.clear()
             finish()
+            val intent = Intent(this,WordBookActivity::class.java)
+            intent.putExtra("email",email)
+            intent.putExtra("title", title)
+            intent.putExtra("date", date)
+            startActivity(intent)
         }
-
     }
 }

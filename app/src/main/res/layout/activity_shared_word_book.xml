@@ -11,13 +11,12 @@
         android:id="@+id/shared_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2" />
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/btn_SharedWord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="내 단어장에 추가"
-        android:layout_weight="1"/>
+        android:text="내 단어장에 추가" />
 
 </LinearLayout>

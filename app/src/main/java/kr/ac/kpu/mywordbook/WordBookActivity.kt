@@ -2,16 +2,23 @@ package kr.ac.kpu.mywordbook
 
 import android.R.id.checkbox
 import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_word_book.*
+import kotlinx.android.synthetic.main.word_list.*
+import kotlinx.android.synthetic.main.word_list.view.*
 
 
 class WordBookActivity : AppCompatActivity() {
@@ -19,7 +26,7 @@ class WordBookActivity : AppCompatActivity() {
     val database = Firebase.database
 
     lateinit var listview : ListView
-    lateinit var adapter : WordAdapter
+    lateinit var adapter : NoCheckBoxAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +34,10 @@ class WordBookActivity : AppCompatActivity() {
 
         var wList = arrayListOf<ListWord>()
 
-        adapter = WordAdapter()
         listview = findViewById(R.id.word_listview)
+        adapter = NoCheckBoxAdapter()
         listview.adapter = adapter
+
         //val cb : CheckBox? = findViewById(R.id.word_check) as CheckBox
         //listview.onItemClickListener =
         //    AdapterView.OnItemClickListener { parent, view, position, id ->
@@ -48,9 +56,20 @@ class WordBookActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
+
+                adapter = NoCheckBoxAdapter()
+                listview.adapter = adapter
+
                 for (snapshot in p0.children) {
                     wList.add(ListWord("${snapshot.key.toString()}", "${snapshot.value.toString()}"))
                 }
+
+                for (i in 0 until wList.size) {
+                    adapter.addItem("${wList[i].egWord}", "${wList[i].krWord}")
+                    //Log.d(ContentValues.TAG, "###############################")
+                }
+                wList.clear()
+
             }
         })
 
@@ -69,11 +88,13 @@ class WordBookActivity : AppCompatActivity() {
                 intent.putExtra("date",date)
                 intent.putExtra("email",email)
                 startActivity(intent)
+                finish()
             }
             btn_text.setOnClickListener {
                 val dlg = layoutInflater.inflate(R.layout.input_wordbook, null)
                 val dlgBuilder = AlertDialog.Builder(this)
                 dlgBuilder.setView(dlg)
+
 
 
                 dlgBuilder.setPositiveButton("추가") { dialogInterface, i ->
@@ -86,7 +107,9 @@ class WordBookActivity : AppCompatActivity() {
                     for (i in 0 until wList.size) {
                         myRef.child("${wList[i].egWord}").setValue("${wList[i].krWord}")
                         adapter.addItem("${wList[i].egWord}", "${wList[i].krWord}")
+                        adapter.notifyDataSetChanged()
                     }
+
 /*
                     for(i in 0 until wList.size) {
                         adapter.addItem("${wList[i].egWord}", "${wList[i].krWord}")

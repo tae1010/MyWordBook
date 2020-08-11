@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kr.ac.kpu.mywordbook.CheckableLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/egWord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/krWord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="10dp"/>
+
+</kr.ac.kpu.mywordbook.CheckableLinearLayout>

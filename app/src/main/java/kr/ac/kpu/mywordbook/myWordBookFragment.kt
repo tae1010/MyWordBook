@@ -73,16 +73,16 @@ class myWordBookFragment : Fragment() {
                         for (snapshot in p0.children) {
                             wList.add(ListWord(snapshot.key,snapshot.value.toString()))
                         }
+                        Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
                         for(i in 0 until wList.size) {
                             myRef2.child("$email").child("${wbList[info.position].title}")
                                 .child("${wList[i].egWord}").setValue("${wList[i].krWord}")
                         }
-                        Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
                     }
-
                 })
 
-                Toast.makeText(activity,"rksk",Toast.LENGTH_SHORT).show()
+                //Toast.makeText(activity,"rksk",Toast.LENGTH_SHORT).show()
 
 
                 //Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
@@ -94,7 +94,7 @@ class myWordBookFragment : Fragment() {
                 for (i in 0 until wbList.size) {
                     if(wbList[info.position].date == "${wbList[i].date}") {
                         myRef.child("$email").child("${wbList[i].date}").removeValue()
-                        Toast.makeText(activity, "${info.position}  $i", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(activity, "${info.position}  $i", Toast.LENGTH_SHORT).show()
                     }
                 }
                 wbList.removeAt(info.position)
@@ -119,9 +119,8 @@ class myWordBookFragment : Fragment() {
         setHasOptionsMenu(true)
 
 
-        adapter = WordBookAdapter()
         listview = view!!.findViewById(R.id.lv_wordbook) as ListView
-        listview.adapter = adapter
+
 
         registerForContextMenu(listview)
 
@@ -137,6 +136,9 @@ class myWordBookFragment : Fragment() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
+
+
+
                 for (snapshot in p0.children) {
                     val myRef2 = database.getReference("users/$email/${snapshot.key}")
                     myRef2.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -144,9 +146,18 @@ class myWordBookFragment : Fragment() {
                         }
 
                         override fun onDataChange(p0: DataSnapshot) {
+
+                            adapter = WordBookAdapter()
+                            listview.adapter = adapter
+
                             for (snapshot in p0.children) {
                                 wbList.add(ListWordBook("${snapshot.key.toString()}", "${myRef2.key.toString()}"))
                                 //Toast.makeText(activity,"${snapshot.key.toString()}",Toast.LENGTH_SHORT).show()
+                            }
+
+                            for (i in 0 until wbList.size) {
+                                adapter.addItem("${wbList[i].title}", "${wbList[i].date}")
+                                Log.d(TAG, "###############################")
                             }
                         }
                     })
@@ -154,10 +165,7 @@ class myWordBookFragment : Fragment() {
             }
         })
 
-        for (i in 0 until wbList.size) {
-            adapter.addItem("${wbList[i].title}", "${wbList[i].date}")
-            Log.d(TAG, "###############################")
-        }
+
 
         listview.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
@@ -223,4 +231,7 @@ class myWordBookFragment : Fragment() {
         }
         return false
     }
+
+
+
 }
