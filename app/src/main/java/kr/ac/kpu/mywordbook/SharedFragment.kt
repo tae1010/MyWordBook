@@ -38,6 +38,8 @@ class SharedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val email2 = activity!!.intent.getStringExtra("email")
+
         var swbList = arrayListOf<ListWordBook>()
         val view = inflater.inflate(R.layout.fragshared, container, false)
 
@@ -81,10 +83,10 @@ class SharedFragment : Fragment() {
         listview.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 val intent = Intent(activity, SharedWordBookActivity::class.java)
-                val email2 = intent.getStringExtra("email2")
+                //intent.putExtra("email",email2)
                 //val bundle = intent.getBundleExtra("bundle")
                // val email2 = bundle!!.getSerializable("email2")
-                Toast.makeText(activity, "$email2", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(activity, "$email2", Toast.LENGTH_SHORT).show()
 
                 //intent.putExtra("swb",swbList)
                 //intent.putExtra("position",position)

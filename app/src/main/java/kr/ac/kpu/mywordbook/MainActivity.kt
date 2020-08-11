@@ -18,9 +18,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val intent = Intent(this, myWordBookFragment::class.java)
+        val intent2 = Intent(this,SharedFragment::class.java)
 
         val email = intent.getStringExtra("email")
         intent.putExtra("email",email)
+        intent2.putExtra("email",email)
 
         //val bundle = Bundle()
         //bundle.putSerializable("email2",email)

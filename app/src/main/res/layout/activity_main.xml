@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="10dp"
+            android:padding="20dp"
             android:src="@drawable/ic_mywordbook" />
 
         <ImageView
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="10dp"
+            android:padding="20dp"
             android:src="@drawable/ic_sharewordbook" />
 
         <ImageView
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="10dp"
+            android:padding="20dp"
             android:src="@drawable/ic_checkbox" />
 
         <ImageView
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="10dp"
+            android:padding="20dp"
             android:src="@drawable/ic_search" />
 
 

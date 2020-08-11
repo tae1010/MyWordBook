@@ -9,7 +9,7 @@
         android:id="@+id/list_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:padding="5dp"
         android:text="Title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -18,7 +18,7 @@
         android:id="@+id/list_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:padding="5dp"
         android:text="Date" />
 </LinearLayout>
