@@ -6,14 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="127dp"
+        app:layout_constraintBottom_toTopOf="@+id/ed_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/voca_pig" />
+
     <EditText
         android:id="@+id/ed_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="76dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:hint="email"
         android:inputType="textPersonName"
@@ -21,23 +34,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/ed_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="129dp"
+        android:layout_marginBottom="50dp"
         android:ems="10"
         android:hint="password"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/btn_signIn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_email" />
 
@@ -46,13 +58,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="100dp"
-        android:layout_marginBottom="20dp"
         android:text="SIGN IN"
         app:layout_constraintBottom_toTopOf="@+id/btn_signUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_password" />
 
@@ -61,14 +72,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="100dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="126dp"
         android:text="SIGN UP"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_signIn" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

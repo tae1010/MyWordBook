@@ -12,14 +12,23 @@
         <activity android:name=".SharedWordBookActivity"></activity>
         <activity android:name=".WordBookActivity" />
         <activity android:name=".PictureTextActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".SignUpActivity"
+            android:theme="@style/Theme.First"/>
+        <activity android:name=".LoginActivity"
+            android:theme="@style/Theme.First">
+
+        </activity>
+
+        <activity android:name=".Loadding"
+            android:theme="@style/Theme.First">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".MainActivity" />
     </application>
 
