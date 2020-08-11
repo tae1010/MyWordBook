@@ -131,6 +131,10 @@ class myWordBookFragment : Fragment() {
         val email = activity!!.intent.getStringExtra("email")
         val myRef1 = database.getReference("users/$email")
 
+        val intent2 = Intent(activity, SharedFragment::class.java)
+        intent2.putExtra("email2",email)
+        Toast.makeText(activity, "$email", Toast.LENGTH_SHORT).show()
+
         myRef1.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }

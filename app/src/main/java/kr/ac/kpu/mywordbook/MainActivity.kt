@@ -18,21 +18,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val intent = Intent(this, myWordBookFragment::class.java)
-        val intent2 = Intent(this,SharedFragment::class.java)
 
         val email = intent.getStringExtra("email")
         intent.putExtra("email",email)
-        intent2.putExtra("email",email)
+
+        //val bundle = Bundle()
+        //bundle.putSerializable("email2",email)
+        //SharedFragment().setArguments(bundle)
 
 
 
         setFrag(0)
+
+
+
+
 
         im_myWord.setOnClickListener {
             setFrag(0)
         }
 
         im_sharedWord.setOnClickListener {
+
             setFrag(1)
         }
 
@@ -55,6 +62,7 @@ class MainActivity : AppCompatActivity() {
             }
             1 ->{
                 ft.replace(R.id.mainFrame, SharedFragment()).commit()
+
             }
             2 ->{
                 ft.replace(R.id.mainFrame, QuizFragment()).commit()

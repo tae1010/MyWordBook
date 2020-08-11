@@ -1,13 +1,19 @@
 package kr.ac.kpu.mywordbook
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_shared_word_book.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class SharedWordBookActivity : AppCompatActivity() {
 
@@ -16,12 +22,14 @@ class SharedWordBookActivity : AppCompatActivity() {
     lateinit var listview : ListView
     lateinit var adapter : NoCheckBoxAdapter
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shared_word_book)
 
 
         var swList = arrayListOf<ListWord>()
+        var swList2 = arrayListOf<ListWord>()
 
         listview = findViewById(R.id.shared_listview)
 
@@ -32,6 +40,8 @@ class SharedWordBookActivity : AppCompatActivity() {
         //val position = intent.getStringExtra("position")
         val title = intent.getStringExtra("title")
         val email = intent.getStringExtra("email")
+        val email2 = intent.getStringExtra("email2")
+
 
         val myRef = database.getReference("users/share/$email/$title")
 
@@ -46,6 +56,7 @@ class SharedWordBookActivity : AppCompatActivity() {
 
                 for (snapshot in p0.children) {
                     swList.add(ListWord("${snapshot.key.toString()}", "${snapshot.value.toString()}"))
+                    swList2.add(ListWord("${snapshot.key.toString()}", "${snapshot.value.toString()}"))
                 }
 
                 for (i in 0 until swList.size) {
@@ -55,7 +66,20 @@ class SharedWordBookActivity : AppCompatActivity() {
             }
         })
 
+        btn_SharedWord.setOnClickListener {
+            val current = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분")
+            val nowtime = current.format(formatter)
 
+            adapter = NoCheckBoxAdapter()
+            listview.adapter = adapter
 
+            val myRef2 = database.getReference("users")
+            for(i in 0 until swList2.size) {
+                myRef2.child("$email2").child("$nowtime").child("$title").child("${swList2[i].egWord}")
+                    .setValue("${swList2[i].krWord}")
+            }
+            finish()
+        }
     }
 }
