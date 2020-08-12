@@ -5,10 +5,16 @@
         <item name="colorPrimary">@color/colorBlack</item>
         <item name="colorPrimaryDark">@color/colorBlack</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
+
     <style name="Theme.First" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/colorWhite</item>
         <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="mainTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@color/colordarkgray</item>
     </style>
 
 </resources>

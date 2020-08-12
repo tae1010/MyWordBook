@@ -17,6 +17,8 @@
         android:id="@+id/add_picture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         android:layout_margin="10dp"
         android:text="사진으로 추가"/>
 
@@ -24,6 +26,8 @@
         android:id="@+id/add_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         android:layout_margin="10dp"
         android:text="직접 입력" />
 

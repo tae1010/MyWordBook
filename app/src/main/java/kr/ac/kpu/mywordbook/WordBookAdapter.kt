@@ -1,6 +1,7 @@
 package kr.ac.kpu.mywordbook
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,9 @@ class WordBookAdapter : BaseAdapter() {
         val dateText = view!!.findViewById(R.id.list_date) as TextView
 
         val wordbookListItem = wordbookList[position]
+
+        titleText.setTextColor(Color.WHITE)
+        dateText.setTextColor(Color.GRAY)
 
         titleText.setText(wordbookListItem.title)
         dateText.setText(wordbookListItem.date)

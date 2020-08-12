@@ -22,10 +22,6 @@ class Loadding : AppCompatActivity() {
         }, SPLASH_VIEW_TIME)
     }
 
-
-
-
-
     override fun onBackPressed() {
 
     }

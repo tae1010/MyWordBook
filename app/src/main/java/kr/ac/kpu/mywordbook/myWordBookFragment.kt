@@ -73,7 +73,7 @@ class myWordBookFragment : Fragment() {
                         for (snapshot in p0.children) {
                             wList.add(ListWord(snapshot.key,snapshot.value.toString()))
                         }
-                        Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
                         for(i in 0 until wList.size) {
                             myRef2.child("$email").child("${wbList[info.position].title}")
                                 .child("${wList[i].egWord}").setValue("${wList[i].krWord}")
@@ -133,7 +133,7 @@ class myWordBookFragment : Fragment() {
 
         val intent2 = Intent(activity, SharedFragment::class.java)
         intent2.putExtra("email2",email)
-        Toast.makeText(activity, "$email", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, "$email", Toast.LENGTH_SHORT).show()
 
         myRef1.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {

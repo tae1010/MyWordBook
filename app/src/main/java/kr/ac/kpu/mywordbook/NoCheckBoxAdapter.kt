@@ -2,6 +2,7 @@ package kr.ac.kpu.mywordbook
 
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,9 @@ class NoCheckBoxAdapter : BaseAdapter(){
 
         egText.setText(wordListItem.egWord)
         krText.setText(wordListItem.krWord)
+
+        egText.setTextColor(Color.WHITE)
+        krText.setTextColor(Color.WHITE)
 
         return view
 
