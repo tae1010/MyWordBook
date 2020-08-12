@@ -34,6 +34,7 @@ class WordBookActivity : AppCompatActivity() {
 
         var wList = arrayListOf<ListWord>()
 
+
         listview = findViewById(R.id.word_listview)
         adapter = WordAdapter()
         listview.adapter = adapter
@@ -47,6 +48,7 @@ class WordBookActivity : AppCompatActivity() {
         //    cb!!.setChecked(true)
         //}
 
+        var wList1 = arrayListOf<ListWord>()
 
         val title = intent.getStringExtra("title")
         val date = intent.getStringExtra("date")
@@ -67,10 +69,16 @@ class WordBookActivity : AppCompatActivity() {
                     wList.add(ListWord("${snapshot.key.toString()}", "${snapshot.value.toString()}"))
                 }
 
+                for (snapshot in p0.children) {
+                    wList1.add(ListWord("${snapshot.key.toString()}", "${snapshot.value.toString()}"))
+                }
+
                 for (i in 0 until wList.size) {
                     adapter.addItem("${wList[i].egWord}", "${wList[i].krWord}")
                     //Log.d(ContentValues.TAG, "###############################")
                 }
+
+
                 wList.clear()
 
             }
@@ -128,6 +136,20 @@ class WordBookActivity : AppCompatActivity() {
         btn_deleteWord.setOnClickListener {
 
             val myRef = database.getReference("users/$email/$date/$title")
+            val checkedItems = listview.checkedItemPositions
+
+            for (i in 0 until wList1.size) {
+                //Toast.makeText(this, "${wList1.size}", Toast.LENGTH_SHORT).show()
+                if (checkedItems.get(i)) {
+
+                    myRef.child("${wList1[i].egWord}").removeValue()
+
+                    //Toast.makeText(this@WordBookActivity, "5", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            listview.clearChoices()
+            wList1.clear()
 
 
             myRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -136,32 +158,23 @@ class WordBookActivity : AppCompatActivity() {
 
                 override fun onDataChange(p0: DataSnapshot) {
 
-                    listview = findViewById(R.id.word_listview)
                     adapter = WordAdapter()
                     listview.adapter = adapter
-                    val checkedItems = listview.checkedItemPositions
 
                     for (snapshot in p0.children) {
-                        wList.add(ListWord("${snapshot.key.toString()}", "${snapshot.value.toString()}"))
+                        wList1.add(ListWord("${snapshot.key.toString()}", "${snapshot.value.toString()}"))
                     }
-                    //Toast.makeText(this@WordBookActivity, "5", Toast.LENGTH_SHORT).show()
-                    for (i in 0 until wList.size) {
-                        Toast.makeText(this@WordBookActivity, "${wList.size}", Toast.LENGTH_SHORT).show()
-                        if (checkedItems.get(i)) {
-                            wList.removeAt(i)
-                            myRef.child("${wList[i].egWord}").removeValue()
-                            //Toast.makeText(this@WordBookActivity, "5", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    listview.clearChoices()
-                    //Toast.makeText(this, "${transWordList1.size} ${transWordList.size}", Toast.LENGTH_SHORT).show()
-                    adapter.notifyDataSetChanged()
 
-                    for(i in 0 until wList.size){
-                        adapter.addItem("${wList[i].egWord}","${wList[i].krWord}")
+                    for(i in 0 until wList1.size){
+                        adapter.addItem("${wList1[i].egWord}","${wList1[i].krWord}")
                     }
+
                 }
             })
+
+            wList1.clear()
+
+
             //Toast.makeText(this, "${wList.size}", Toast.LENGTH_SHORT).show()
 
             //Toast.makeText(this,"삭제되었습니다.",Toast.LENGTH_SHORT).show()

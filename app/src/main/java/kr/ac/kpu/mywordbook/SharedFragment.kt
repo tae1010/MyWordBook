@@ -39,7 +39,7 @@ class SharedFragment : Fragment() {
     ): View? {
 
         val email2 = activity!!.intent.getStringExtra("email")
-        Toast.makeText(activity, "$email2", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, "$email2", Toast.LENGTH_SHORT).show()
         
 
         var swbList = arrayListOf<ListWordBook>()
