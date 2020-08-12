@@ -11,14 +11,35 @@
         android:id="@+id/word_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:choiceMode="multipleChoice" />
 
-    <Button
-        android:id="@+id/btn_addWord"
-        android:background="@color/colorWhite"
-        android:textColor="@color/colorBlack"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="단어 추가" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_addWord"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:text="단어 추가"
+
+            android:textColor="@color/colorBlack" />
+
+        <Button
+            android:id="@+id/btn_deleteWord"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+
+            android:text="단어 삭제"
+
+            android:textColor="@color/colorBlack" />
+
+    </LinearLayout>
 
 </LinearLayout>

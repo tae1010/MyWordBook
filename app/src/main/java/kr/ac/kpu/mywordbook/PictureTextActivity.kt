@@ -33,8 +33,6 @@ class PictureTextActivity : AppCompatActivity() {
     var transWordList1 = ArrayList<ListWord>()
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_text)

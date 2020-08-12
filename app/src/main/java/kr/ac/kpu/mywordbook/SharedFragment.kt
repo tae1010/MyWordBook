@@ -39,6 +39,8 @@ class SharedFragment : Fragment() {
     ): View? {
 
         val email2 = activity!!.intent.getStringExtra("email")
+        Toast.makeText(activity, "$email2", Toast.LENGTH_SHORT).show()
+        
 
         var swbList = arrayListOf<ListWordBook>()
         val view = inflater.inflate(R.layout.fragshared, container, false)
@@ -96,9 +98,6 @@ class SharedFragment : Fragment() {
                 intent.putExtra("email2",email2)
                 startActivity(intent)
             }
-
-
-
         return view
     }
 }

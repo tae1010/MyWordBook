@@ -26,7 +26,7 @@ class WordBookActivity : AppCompatActivity() {
     val database = Firebase.database
 
     lateinit var listview : ListView
-    lateinit var adapter : NoCheckBoxAdapter
+    lateinit var adapter : WordAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +35,11 @@ class WordBookActivity : AppCompatActivity() {
         var wList = arrayListOf<ListWord>()
 
         listview = findViewById(R.id.word_listview)
-        adapter = NoCheckBoxAdapter()
+        adapter = WordAdapter()
         listview.adapter = adapter
+
+
+        val count = adapter.count
 
         //val cb : CheckBox? = findViewById(R.id.word_check) as CheckBox
         //listview.onItemClickListener =
@@ -57,7 +60,7 @@ class WordBookActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
 
-                adapter = NoCheckBoxAdapter()
+                adapter = WordAdapter()
                 listview.adapter = adapter
 
                 for (snapshot in p0.children) {
@@ -120,6 +123,49 @@ class WordBookActivity : AppCompatActivity() {
 
                 }.show()
             }
+        }
+
+        btn_deleteWord.setOnClickListener {
+
+            val myRef = database.getReference("users/$email/$date/$title")
+
+
+            myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+
+                    listview = findViewById(R.id.word_listview)
+                    adapter = WordAdapter()
+                    listview.adapter = adapter
+                    val checkedItems = listview.checkedItemPositions
+
+                    for (snapshot in p0.children) {
+                        wList.add(ListWord("${snapshot.key.toString()}", "${snapshot.value.toString()}"))
+                    }
+                    //Toast.makeText(this@WordBookActivity, "5", Toast.LENGTH_SHORT).show()
+                    for (i in 0 until wList.size) {
+                        Toast.makeText(this@WordBookActivity, "${wList.size}", Toast.LENGTH_SHORT).show()
+                        if (checkedItems.get(i)) {
+                            wList.removeAt(i)
+                            myRef.child("${wList[i].egWord}").removeValue()
+                            //Toast.makeText(this@WordBookActivity, "5", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    listview.clearChoices()
+                    //Toast.makeText(this, "${transWordList1.size} ${transWordList.size}", Toast.LENGTH_SHORT).show()
+                    adapter.notifyDataSetChanged()
+
+                    for(i in 0 until wList.size){
+                        adapter.addItem("${wList[i].egWord}","${wList[i].krWord}")
+                    }
+                }
+            })
+            //Toast.makeText(this, "${wList.size}", Toast.LENGTH_SHORT).show()
+
+            //Toast.makeText(this,"삭제되었습니다.",Toast.LENGTH_SHORT).show()
+
         }
     }
 }
