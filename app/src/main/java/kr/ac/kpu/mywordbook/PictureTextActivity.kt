@@ -1,15 +1,22 @@
 package kr.ac.kpu.mywordbook
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.Menu
 import android.view.View
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage
@@ -32,11 +39,12 @@ class PictureTextActivity : AppCompatActivity() {
     var transWordList = ArrayList<ListWord>()
     var transWordList1 = ArrayList<ListWord>()
 
+    val CAMERA_PERMISSION = arrayOf(Manifest.permission.CAMERA)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_text)
-
 
 
         ocrImage = ocrImageView
@@ -49,9 +57,50 @@ class PictureTextActivity : AppCompatActivity() {
         //set an onclick listener on the button to trigger the @processImage method
         processImageBtn.setOnClickListener {
             processImage(processImageBtn)
-
-
         }
+
+        camera.setOnClickListener {
+            if(isPermitted(CAMERA_PERMISSION)) {
+                openCamera()
+            } else {
+                ActivityCompat.requestPermissions(this,CAMERA_PERMISSION,2)
+            }
+        }
+    }
+    fun isPermitted(permissions : Array<String>) : Boolean{
+        for(permission in permissions) {
+            val result = ContextCompat.checkSelfPermission(this, permission)
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                return false
+            }
+        }
+        return true
+    }
+
+    fun openCamera(){
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent,3)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+       when(requestCode){
+           2 ->{
+               var checked = true
+               for(grant in grantResults){
+                   if(grant != PackageManager.PERMISSION_GRANTED){
+                       checked = false
+                       break
+                   }
+               }
+               if(checked){
+                   openCamera()
+               }
+           }
+       }
     }
 
     fun pickImage() {
@@ -65,6 +114,8 @@ class PictureTextActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             ocrImage.setImageURI(data!!.data)   //ocrImage에 select한 이미지의 uri저장
+        } else if(requestCode == 3 && resultCode == Activity.RESULT_OK){
+            val bitmap = data?.extras?.get("data") as Bitmap
         }
     }
 
