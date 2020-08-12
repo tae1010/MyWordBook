@@ -7,6 +7,8 @@
 
     <ListView
         android:id="@+id/lv_wordbook"
+        android:dividerHeight="10dp"
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
