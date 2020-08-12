@@ -2,6 +2,7 @@ package kr.ac.kpu.mywordbook
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -9,7 +10,10 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
@@ -26,6 +30,8 @@ import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.text.FirebaseVisionText
 import kotlinx.android.synthetic.main.activity_picture_text.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class PictureTextActivity : AppCompatActivity() {
@@ -67,6 +73,25 @@ class PictureTextActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?) :Boolean {
+        menuInflater.inflate(R.menu.camera, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.camera ->
+
+
+
+                return true
+        }
+
+        return false
+    }
+
+
     fun isPermitted(permissions : Array<String>) : Boolean{
         for(permission in permissions) {
             val result = ContextCompat.checkSelfPermission(this, permission)
@@ -233,4 +258,5 @@ class PictureTextActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 }
