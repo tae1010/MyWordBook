@@ -9,11 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/mainTheme">
-        <activity android:name=".SharedWordBookActivity"></activity>
-        <activity android:name=".WordBookActivity" />
-        <activity android:name=".PictureTextActivity" />
+        <activity android:name=".SharedWordBookActivity"
+            android:label="@string/myAppName"></activity>
+        <activity android:name=".WordBookActivity"
+            android:label="@string/myAppName"/>
+        <activity android:name=".PictureTextActivity"
+            android:label="@string/myAppName"/>
         <activity android:name=".SignUpActivity"
-            android:theme="@style/Theme.First"/>
+            android:theme="@style/Theme.First"
+            android:label="@string/myAppName"/>
         <activity android:name=".LoginActivity"
             android:theme="@style/Theme.First">
 
@@ -29,7 +33,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:label="@string/myAppName"/>
     </application>
 
 </manifest>

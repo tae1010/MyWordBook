@@ -128,6 +128,8 @@ class myWordBookFragment : Fragment() {
         setHasOptionsMenu(true)
 
 
+
+
         listview = view!!.findViewById(R.id.lv_wordbook) as ListView
 
 

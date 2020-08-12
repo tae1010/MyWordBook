@@ -14,6 +14,7 @@
     </style>
 
     <style name="mainTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:fontFamily">@font/titleregular</item>
         <item name="android:windowBackground">@color/colordarkgray</item>
     </style>
 

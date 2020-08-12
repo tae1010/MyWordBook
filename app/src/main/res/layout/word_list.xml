@@ -16,6 +16,7 @@
         android:id="@+id/egWord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/pontlight"
         android:layout_weight="1"
         android:layout_margin="10dp"/>
 
@@ -23,6 +24,7 @@
         android:id="@+id/krWord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/pontlight"
         android:layout_weight="1"
         android:layout_margin="10dp"/>
 

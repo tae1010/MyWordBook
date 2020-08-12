@@ -8,6 +8,13 @@
         android:fontStyle = "normal"
         android:fontWeight = "400"
         android:font = "@font/titleregular"/>
-
+    <font
+        android:fontStyle = "normal"
+        android:fontWeight = "400"
+        android:font = "@font/mediun"/>
+    <font
+        android:fontStyle = "normal"
+        android:fontWeight = "400"
+        android:font = "@font/extrabole"/>
 
 </font-family>
