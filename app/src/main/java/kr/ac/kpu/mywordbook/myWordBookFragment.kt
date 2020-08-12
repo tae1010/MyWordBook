@@ -82,9 +82,12 @@ class myWordBookFragment : Fragment() {
                     }
                 })
 
+                for(i in 0 until wbList.size){
+                    adapter.addItem("${wbList[i].title}","${wbList[i].date}")
+                }
+                Toast.makeText(activity,"공유되었습니다.",Toast.LENGTH_SHORT).show()
+
                 //Toast.makeText(activity,"rksk",Toast.LENGTH_SHORT).show()
-
-
                 //Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
                 true
             }
@@ -98,10 +101,16 @@ class myWordBookFragment : Fragment() {
                     }
                 }
                 wbList.removeAt(info.position)
+                adapter.notifyDataSetChanged()
 
-                adapter.notifyDataSetChanged();
+                for(i in 0 until wbList.size){
+                    adapter.addItem("${wbList[i].title}","${wbList[i].date}")
+                }
+                Toast.makeText(activity,"삭제되었습니다.",Toast.LENGTH_SHORT).show()
+
                 true
             }
+
 
             else -> super.onContextItemSelected(item)
         }

@@ -141,13 +141,14 @@ class PictureTextActivity : AppCompatActivity() {
                         }
                         .addOnFailureListener {
                             //resultEditText.append(elementText+"\n")
-                            transWordList.add(ListWord("$elementText", ""))
+                            transWordList.add(ListWord("$elementText", "$elementText"))
                         }
                     //Toast.makeText(this,"${transWordList.size}",Toast.LENGTH_SHORT).show()
                     //adapter.addItem("${transWordList}", "$translatedText")
                 }
             }
         }
+
         for (i in 0 until transWordList.size) {
             adapter.addItem("${transWordList[i].egWord}", "${transWordList[i].krWord}")
             adapter.notifyDataSetChanged()
