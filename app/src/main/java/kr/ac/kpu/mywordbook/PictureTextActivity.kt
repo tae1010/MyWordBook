@@ -65,13 +65,6 @@ class PictureTextActivity : AppCompatActivity() {
             processImage(processImageBtn)
         }
 
-        camera.setOnClickListener {
-            if(isPermitted(CAMERA_PERMISSION)) {
-                openCamera()
-            } else {
-                ActivityCompat.requestPermissions(this,CAMERA_PERMISSION,2)
-            }
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?) :Boolean {
@@ -81,11 +74,13 @@ class PictureTextActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.camera ->
-
-
-
-                return true
+            R.id.camera ->{
+                if(isPermitted(CAMERA_PERMISSION)) {
+                    openCamera()
+                } else {
+                    ActivityCompat.requestPermissions(this,CAMERA_PERMISSION,2)
+                }
+            }
         }
 
         return false
