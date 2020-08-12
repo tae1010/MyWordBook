@@ -116,6 +116,7 @@ class PictureTextActivity : AppCompatActivity() {
             ocrImage.setImageURI(data!!.data)   //ocrImage에 select한 이미지의 uri저장
         } else if(requestCode == 3 && resultCode == Activity.RESULT_OK){
             val bitmap = data?.extras?.get("data") as Bitmap
+            ocrImageView.setImageBitmap(bitmap)
         }
     }
 
