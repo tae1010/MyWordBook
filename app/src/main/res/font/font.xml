@@ -4,5 +4,10 @@
         android:fontStyle = "normal"
         android:fontWeight = "400"
         android:font = "@font/pontlight"/>
+    <font
+        android:fontStyle = "normal"
+        android:fontWeight = "400"
+        android:font = "@font/titleregular"/>
+
 
 </font-family>
