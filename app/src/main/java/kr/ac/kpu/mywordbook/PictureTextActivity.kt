@@ -52,7 +52,6 @@ class PictureTextActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_text)
 
-
         ocrImage = ocrImageView
 
         //set an onclick listener on the button to trigger///// the @pickImage() method

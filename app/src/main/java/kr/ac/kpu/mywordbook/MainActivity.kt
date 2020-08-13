@@ -4,6 +4,7 @@ package kr.ac.kpu.mywordbook
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.webkit.WebView
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -50,7 +51,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         im_search.setOnClickListener {
-            setFrag(3)
+            val intent = Intent(this,WebViewActivity::class.java)
+            startActivity(intent)
         }
 
     }
@@ -68,9 +70,6 @@ class MainActivity : AppCompatActivity() {
             }
             2 ->{
                 ft.replace(R.id.mainFrame, QuizFragment()).commit()
-            }
-            3 ->{
-                ft.replace(R.id.mainFrame, SearchFragment()).commit()
             }
 
         }
