@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="검색사이트" >
+        <menu >
+            <item
+                android:id="@+id/action_naver"
+                android:title="네이버 어학사전" />
+            <item
+                android:id="@+id/action_daum"
+                android:title="다음 어학사전" />
+            <item
+                android:id="@+id/action_google"
+                android:title=" 구글 번역기" />
+        </menu>
+    </item>
+    <item android:title="개발자정보" >
+        <menu >
+            <item
+                android:id="@+id/action_email"
+                android:title="Send Email" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
+</menu>

@@ -1,5 +1,6 @@
 package kr.ac.kpu.mywordbook
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +18,11 @@ class SearchFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragsearch, container,false)
 
 
-        val myWebView: WebView = view.findViewById<View>(R.id.webView) as WebView
-        myWebView.loadUrl("https://dict.naver.com")
+        val intent = Intent(activity,WebViewActivity::class.java)
+        startActivity(intent)
+
+        //val myWebView: WebView = view.findViewById<View>(R.id.webView) as WebView
+        //myWebView.loadUrl("https://dict.naver.com")
 
 
         return view
