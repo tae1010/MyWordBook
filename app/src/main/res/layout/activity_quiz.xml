@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuizActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quiz"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:textSize="50sp"
+        android:layout_marginBottom="@android:dimen/app_icon_size"
+        tools:layout_editor_absoluteY="30dp"
+        />
+
+    <TextView
+        android:id="@+id/textWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="center"
+        android:text="Word"
+        android:textSize="36sp"
+        android:layout_margin="@android:dimen/app_icon_size"
+        tools:layout_editor_absoluteY="168dp"
+        />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="277dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="374dp"
+        />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="464dp"
+        />
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="answer"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="550dp"
+        />
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="NEXT"
+        />
+
+</LinearLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.ac.kpu.mywordbook" >
+    package="kr.ac.kpu.mywordbook">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -8,14 +8,15 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_pigvoca"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_pigvoca_round"
         android:supportsRtl="true"
-        android:theme="@style/mainTheme" >
-        <activity android:name=".WebViewActivity"
-            android:label="@string/myAppName" >
-        </activity>
+        android:theme="@style/mainTheme">
+        <activity android:name=".QuizActivity"></activity>
+        <activity
+            android:name=".WebViewActivity"
+            android:label="@string/myAppName"></activity>
         <activity
             android:name=".SharedWordBookActivity"
             android:label="@string/myAppName" />
@@ -31,11 +32,10 @@
             android:theme="@style/Theme.First" />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.First" >
-        </activity>
+            android:theme="@style/Theme.First"></activity>
         <activity
             android:name=".Loadding"
-            android:theme="@style/Theme.First" >
+            android:theme="@style/Theme.First">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

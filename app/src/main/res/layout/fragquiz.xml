@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
+    <ListView
+        android:id="@+id/lv_wordbook"
+        android:dividerHeight="10dp"
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="공유 단어장"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:layout_height="match_parent" />
 </LinearLayout>
