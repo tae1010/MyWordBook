@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-
+/*
+리스트뷰에 단어장이름과 날짜를 띄워줌
+ */
 class WordBookAdapter : BaseAdapter() {
 
     private var wordbookList = ArrayList<ListWordBook>()

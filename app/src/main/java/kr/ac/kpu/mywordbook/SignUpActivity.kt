@@ -14,6 +14,10 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.ed_email
 import kotlinx.android.synthetic.main.activity_sign_up.ed_password
 
+/*
+회원가입 기능
+ */
+
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth

@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
-
+/*
+로딩화면
+ */
 
 class Loadding : AppCompatActivity() {
 

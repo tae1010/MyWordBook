@@ -32,7 +32,9 @@ import com.google.firebase.ml.vision.text.FirebaseVisionText
 import kotlinx.android.synthetic.main.activity_picture_text.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-
+/*
+이미지에 있는 텍스트를 인식하여 리스트뷰에 띄워주는 화면
+ */
 
 class PictureTextActivity : AppCompatActivity() {
 
@@ -212,8 +214,6 @@ class PictureTextActivity : AppCompatActivity() {
                             //resultEditText.append(elementText+"\n")
                             transWordList.add(ListWord("$elementText", "$elementText"))
                         }
-                    //Toast.makeText(this,"${transWordList.size}",Toast.LENGTH_SHORT).show()
-                    //adapter.addItem("${transWordList}", "$translatedText")
                 }
             }
         }
@@ -221,24 +221,19 @@ class PictureTextActivity : AppCompatActivity() {
         for (i in 0 until transWordList.size) {
             adapter.addItem("${transWordList[i].egWord}", "${transWordList[i].krWord}")
             adapter.notifyDataSetChanged()
-            //Toast.makeText(this,"가가가",Toast.LENGTH_SHORT).show()
+
         }
 
         pt_add.setOnClickListener {
-            //adapter.clearItem().
             for (i in 0 until transWordList.size) {
                if (checkedItems.get(i)) {
-                    //transWordList.removeAt(i)
                     transWordList1.add(
                         ListWord("${transWordList[i].egWord}", "${transWordList[i].krWord}"))
                 }
             }
-            /*for (i in 0 until transWordList.size) {
-                adapter.addItem("${transWordList[i].egWord}", "${transWordList[i].krWord}")
-            }*/
+
             listview.clearChoices()
-            //Toast.makeText(this, "${transWordList1.size} ${transWordList.size}", Toast.LENGTH_SHORT).show()
-            //adapter.notifyDataSetChanged()
+
             for (i in 0 until transWordList1.size) {
                 val myRef = database.getReference("users/$email/$date/$title")
                 myRef.child("${transWordList1[i].egWord}").setValue("${transWordList1[i].krWord}")

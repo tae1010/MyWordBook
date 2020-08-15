@@ -10,7 +10,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
-
+/*
+로그인 화면 구성
+ */
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
@@ -28,19 +30,20 @@ class LoginActivity : AppCompatActivity() {
 
         btn_signIn.setOnClickListener {
             val email = ed_email.text.toString()
+
+            //.이 들어가면 데이터베이스에 저장이 되지 않으므로 .을 공백으로 변환
             var nodotemail :String = email.replace("."," ")
             val password = ed_password.text.toString()
 
-            for(i in 0 until email.length){
-
-            }
-
+            //만약 이메일이나 비밀번호가 입력되지 않았다면 토스트메세지 출력
             if (email.isEmpty() || password.isEmpty()) {
 
                 Toast.makeText(
                     baseContext, "이메일 또는 비밀번호가 입력되지 않았습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                //아닐경우 로그인 완료
             } else {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
@@ -66,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                     }
             }
         }
-
+//회원가입 버튼을 누르면 회원가입창으로 이동
         btn_signUp.setOnClickListener {
             intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)

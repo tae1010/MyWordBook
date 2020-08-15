@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragsearch.*
-
+/*
+webview 액티비티를 인텐트
+ */
 
 class SearchFragment : Fragment() {
 
@@ -20,10 +22,6 @@ class SearchFragment : Fragment() {
 
         val intent = Intent(activity,WebViewActivity::class.java)
         startActivity(intent)
-
-        //val myWebView: WebView = view.findViewById<View>(R.id.webView) as WebView
-        //myWebView.loadUrl("https://dict.naver.com")
-
 
         return view
     }

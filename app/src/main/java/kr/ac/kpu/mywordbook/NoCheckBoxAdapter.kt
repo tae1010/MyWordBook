@@ -7,9 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-
+/*
+리스트뷰에 띄울 어뎁터(영어단어와 해석된 단어)
+ */
 class NoCheckBoxAdapter : BaseAdapter(){
-
 
     private var wordList = ArrayList<ListWord>()
 

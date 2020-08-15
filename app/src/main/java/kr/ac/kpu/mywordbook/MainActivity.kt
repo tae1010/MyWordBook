@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_wordbook.*
 
-
+/*
+하단 네비게이션 4개의 fragment를 구성
+ */
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,16 +27,7 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("email",email)
         intent2.putExtra("email",email)
 
-        //val bundle = Bundle()
-        //bundle.putSerializable("email2",email)
-        //SharedFragment().setArguments(bundle)
-
-
-
         setFrag(0)
-
-
-
 
 
         im_myWord.setOnClickListener {
@@ -66,12 +59,10 @@ class MainActivity : AppCompatActivity() {
             }
             1 ->{
                 ft.replace(R.id.mainFrame, SharedFragment()).commit()
-
             }
             2 ->{
                 ft.replace(R.id.mainFrame, QuizFragment()).commit()
             }
-
         }
     }
 }

@@ -22,7 +22,11 @@ import kotlinx.android.synthetic.main.fragmywordbook.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+/*
+내가만든 단어장을 볼수 잇는 fraagment
+ */
 
+//ListWordBook 클래스와 ListWord클래스의 배열을 저장
 var wbList = arrayListOf<ListWordBook>()
 var wList = arrayListOf<ListWord>()
 
@@ -33,6 +37,7 @@ class myWordBookFragment : Fragment() {
     lateinit var listview: ListView
     lateinit var adapter: WordBookAdapter
 
+    //컨텍스트 메뉴
     override fun onCreateContextMenu(
         menu: ContextMenu,
         v: View,
@@ -43,6 +48,7 @@ class myWordBookFragment : Fragment() {
         inflater.inflate(R.menu.menu1,menu)
     }
 
+    //컨텍스트 메뉴 안에 기능들
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
 
@@ -60,9 +66,8 @@ class myWordBookFragment : Fragment() {
 
 
         return when(item.itemId){
+            //공유 버튼을 클릭할시 작동하는 기능
             R.id.share ->{
-
-                //myRef2.child("$email").child("${wbList[info.position].title}")
 
                 myRef3.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
@@ -73,12 +78,12 @@ class myWordBookFragment : Fragment() {
                         for (snapshot in p0.children) {
                             wList.add(ListWord(snapshot.key,snapshot.value.toString()))
                         }
-                        //Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
+
                         for(i in 0 until wList.size) {
                             myRef2.child("$email").child("${wbList[info.position].title}")
                                 .child("${wList[i].egWord}").setValue("${wList[i].krWord}")
                         }
-                        //Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
+
                     }
                 })
 
@@ -87,18 +92,16 @@ class myWordBookFragment : Fragment() {
                 }
                 Toast.makeText(activity,"공유되었습니다.",Toast.LENGTH_SHORT).show()
 
-                //Toast.makeText(activity,"rksk",Toast.LENGTH_SHORT).show()
-                //Toast.makeText(activity,"${wList.size}",Toast.LENGTH_SHORT).show()
                 true
             }
 
+            //삭제버튼을 클릭할시 작동하는 기능
             R.id.delete ->{
 
                 for (i in 0 until wbList.size) {
                     if(wbList[info.position].date == "${wbList[i].date}") {
                         if(wbList[info.position].title == "${wbList[i].title}") {
                             myRef.child("$email").child("${wbList[i].date}").child("${wbList[i].title}").removeValue()
-                            //Toast.makeText(activity, "${info.position}  $i", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -112,7 +115,6 @@ class myWordBookFragment : Fragment() {
 
                 true
             }
-
 
             else -> super.onContextItemSelected(item)
         }
@@ -129,32 +131,21 @@ class myWordBookFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-
-
-
         listview = view!!.findViewById(R.id.lv_wordbook) as ListView
-
 
         registerForContextMenu(listview)
 
-
-        //adapter.notifyDataSetChanged() //삭제하거나 추가할때 리스트뷰 갱신
-
-        //Toast.makeText(activity,"$email",Toast.LENGTH_SHORT).show()
         val email = activity!!.intent.getStringExtra("email")
         val myRef1 = database.getReference("users/$email")
 
         val intent2 = Intent(activity, SharedFragment::class.java)
         intent2.putExtra("email2",email)
-        //Toast.makeText(activity, "$email", Toast.LENGTH_SHORT).show()
 
         myRef1.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-
-
 
                 for (snapshot in p0.children) {
                     val myRef2 = database.getReference("users/$email/${snapshot.key}")
@@ -174,7 +165,6 @@ class myWordBookFragment : Fragment() {
 
                             for (i in 0 until wbList.size) {
                                 adapter.addItem("${wbList[i].title}", "${wbList[i].date}")
-                                Log.d(TAG, "###############################")
                             }
                         }
                     })
@@ -182,8 +172,7 @@ class myWordBookFragment : Fragment() {
             }
         })
 
-
-
+        //리스트뷰 선택시 값을 인텐트
         listview.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 val intent = Intent(activity, WordBookActivity::class.java)
@@ -192,7 +181,6 @@ class myWordBookFragment : Fragment() {
                 intent.putExtra("date", wbList[position].date)
                 startActivity(intent)
             }
-
 
         wbList.clear()
 

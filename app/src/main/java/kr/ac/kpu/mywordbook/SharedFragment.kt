@@ -24,6 +24,10 @@ import kr.ac.kpu.mywordbook.R
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+/*
+내 단어장에서 공유시킨 단어장이 데이터베이스에 share로 이동하고 share에 있는 단어장을 리스트뷰에 띄워줌
+ */
+
 class SharedFragment : Fragment() {
 
     val database = Firebase.database

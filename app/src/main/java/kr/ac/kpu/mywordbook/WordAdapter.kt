@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-
+/*
+리스트뷰에 영어단어와 해석되단어를 띄워줌
+ */
 class WordAdapter : BaseAdapter(){
 
 

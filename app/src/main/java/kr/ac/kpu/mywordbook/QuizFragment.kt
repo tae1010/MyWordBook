@@ -17,7 +17,9 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragquiz.*
 import kr.ac.kpu.mywordbook.R
-
+/*
+내가 만든 단어장을 띄워줌
+ */
 class QuizFragment : Fragment() {
 
     val database= Firebase.database

@@ -19,7 +19,9 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_word_book.*
 import kotlinx.android.synthetic.main.word_list.*
 import kotlinx.android.synthetic.main.word_list.view.*
-
+/*
+단어장 리스트를 띄워주는 화면
+ */
 
 class WordBookActivity : AppCompatActivity() {
 
@@ -75,7 +77,6 @@ class WordBookActivity : AppCompatActivity() {
 
                 for (i in 0 until wList.size) {
                     adapter.addItem("${wList[i].egWord}", "${wList[i].krWord}")
-                    //Log.d(ContentValues.TAG, "###############################")
                 }
 
 
@@ -173,11 +174,6 @@ class WordBookActivity : AppCompatActivity() {
             })
 
             wList1.clear()
-
-
-            //Toast.makeText(this, "${wList.size}", Toast.LENGTH_SHORT).show()
-
-            //Toast.makeText(this,"삭제되었습니다.",Toast.LENGTH_SHORT).show()
 
         }
     }

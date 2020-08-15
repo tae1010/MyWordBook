@@ -17,7 +17,9 @@ import org.jetbrains.anko.browse
 import org.jetbrains.anko.email
 import org.jetbrains.anko.sendSMS
 import org.jetbrains.anko.share
-
+/*
+사전을 이용한 단어검색
+ */
 class WebViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

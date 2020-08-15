@@ -14,7 +14,9 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_shared_word_book.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-
+/*
+공유 단어장에 있는 단어들을 보여줌
+ */
 class SharedWordBookActivity : AppCompatActivity() {
 
     val database = Firebase.database
@@ -66,6 +68,7 @@ class SharedWordBookActivity : AppCompatActivity() {
             }
         })
 
+// 버튼을 클릭하면 공유단어장에 있는 단어장이 내 단어장으로 들어옴
         btn_SharedWord.setOnClickListener {
             val current = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분")
