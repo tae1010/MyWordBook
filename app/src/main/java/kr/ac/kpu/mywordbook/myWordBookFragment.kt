@@ -96,8 +96,10 @@ class myWordBookFragment : Fragment() {
 
                 for (i in 0 until wbList.size) {
                     if(wbList[info.position].date == "${wbList[i].date}") {
-                        myRef.child("$email").child("${wbList[i].date}").removeValue()
-                        //Toast.makeText(activity, "${info.position}  $i", Toast.LENGTH_SHORT).show()
+                        if(wbList[info.position].title == "${wbList[i].title}") {
+                            myRef.child("$email").child("${wbList[i].date}").child("${wbList[i].title}").removeValue()
+                            //Toast.makeText(activity, "${info.position}  $i", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
                 wbList.removeAt(info.position)
