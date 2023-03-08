@@ -1,4 +1,4 @@
-# MyWordBook 
+# 암기돼지 - MyWordBook 
 ### 주제 : ocr을 이용한 단어장 어플리케이션<br>
 <hr>
 
